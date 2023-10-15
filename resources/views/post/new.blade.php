@@ -5,6 +5,23 @@
         <div class="bg-white shadow-md rounded my-6 p-5">
           <form method="POST" action="{{ route('admin.posts.store') }}">
             @csrf
+            <h3 class="text-xl my-4 text-gray-600">Status<span class="text-red-600">*</span></h3>
+            <div class="grid grid-cols-3 gap-4">
+              <div class="relative inline-flex">
+                  <select
+                    class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none"
+                    name="category_id">
+                    <option selected disabled>--Select Category --</option>
+                    @foreach ($catgories as $key => $value)
+                    <option value="{{ $value->id }}">{{ $value->title }}</option>
+                    @endforeach
+                  </select>
+                </div>
+                @error('category_id')
+                  <span class="text-red-600  pt-5 pl-5">{{ $message }}</span>
+                @enderror
+            </div>
+            
             <div class="flex flex-col space-y-2">
               <label for="title" class="text-gray-700 select-none font-medium">Title<span class="text-red-600">*</span></label>
               <input id="title" type="text" name="title" value="{{ old('title') }}" placeholder="Enter title"
@@ -27,12 +44,6 @@
             <h3 class="text-xl my-4 text-gray-600">Status<span class="text-red-600">*</span></h3>
             <div class="grid grid-cols-3 gap-4">
               <div class="relative inline-flex">
-                <svg class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none" xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 412 232">
-                  <path
-                    d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-                    fill="#648299" fill-rule="nonzero" />
-                </svg>
                 <select
                   class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none"
                   name="publish">

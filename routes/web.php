@@ -52,6 +52,7 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')->prefix('admin')
         Route::resource('permissions','PermissionController');
         Route::resource('users','UserController');
         Route::resource('posts','PostController');
+        Route::resource('categories','CategoryController');
         Route::resource('comments','PostCommnetController');
 
         Route::get('/profile',[ProfileController::class,'index'])->name('profile');

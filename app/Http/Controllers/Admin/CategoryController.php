@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use App\Models\Post;
 use App\Models\Category;
 use Auth;
-class PostController extends Controller
+
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +17,10 @@ class PostController extends Controller
      */
     function __construct()
     {
-        $this->middleware('role_or_permission:Post access|Post create|Post edit|Post delete', ['only' => ['index','show']]);
-        $this->middleware('role_or_permission:Post create', ['only' => ['create','store']]);
-        $this->middleware('role_or_permission:Post edit', ['only' => ['edit','update']]);
-        $this->middleware('role_or_permission:Post delete', ['only' => ['destroy']]);
+        $this->middleware('role_or_permission:Category access|Category create|Category edit|Category delete', ['only' => ['index','show']]);
+        $this->middleware('role_or_permission:Category create', ['only' => ['create','store']]);
+        $this->middleware('role_or_permission:Category edit', ['only' => ['edit','update']]);
+        $this->middleware('role_or_permission:Category delete', ['only' => ['destroy']]);
     }
 
     /**
@@ -29,9 +30,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $Post= Post::with('getCategory')->paginate(10);
+        $Category= Category::paginate(10);
 
-        return view('post.index',['posts'=>$Post]);
+        return view('category.index',['categories'=>$Category]);
     }
 
     /**
@@ -41,8 +42,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $catgories  = Category::where('status',1)->get();
-        return view('post.new',['catgories' => $catgories]);
+        return view('category.new');
     }
 
     /**
@@ -54,18 +54,16 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'title'           => 'required|min:5',
-            'description'     => 'required|min:50', 
-            'publish'         => 'required',
-            'category_id'     => 'required', 
+            'title'    => 'required|min:3', 
+            'status'   => 'required',   
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $data= $request->all();
         $data['user_id'] = Auth::user()->id;
-        $Post = Post::create($data);
-        return redirect()->back()->withSuccess('Post created !!!');
+        $category = Category::create($data);
+        return redirect()->back()->withSuccess('Category created !!!');
     }
 
     /**
@@ -85,10 +83,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Category $Category)
     {
-        $catgories  = Category::where('status',1)->get();
-       return view('post.edit',['post' => $post, 'catgories' => $catgories]);
+       return view('category.edit',['category' => $Category]);
     }
 
     /**
@@ -98,19 +95,17 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Category $Category)
     {
         $validator = Validator::make($request->all(), [
-            'title'           => 'required|min:5',
-            'description'     => 'required|min:50', 
-            'publish'         => 'required',
-            'category_id'     => 'required',  
+            'title'    => 'required|min:3', 
+            'status'   => 'required',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        $post->update($request->all());
-        return redirect()->back()->withSuccess('Post updated !!!');
+        $Category->update($request->all());
+        return redirect()->back()->withSuccess('Category updated !!!');
     }
 
     /**
@@ -119,9 +114,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Category $Category)
     {
-        $post->delete();
-        return redirect()->back()->withSuccess('Post deleted !!!');
+        $Category->delete();
+        return redirect()->back()->withSuccess('Category deleted !!!');
     }
 }
