@@ -16,6 +16,9 @@
                     placeholder="Enter permission"
                     class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                   />
+                  @error('name')
+                    <span class="text-red-600  pt-5 pl-5">{{ $message }}</span>
+                  @enderror
                 </div>
                 <div class="text-center mt-16">
                   <button type="submit" class="bg-blue-500 text-white font-bold px-5 py-1 rounded focus:outline-none shadow hover:bg-blue-500 transition-colors ">Submit</button>

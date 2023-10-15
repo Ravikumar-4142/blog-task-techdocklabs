@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Post;
 use App\Models\Comment;
 use Auth;
@@ -25,6 +26,13 @@ class FrontuserController extends Controller
 
     public function post_commnet(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'comment'           => 'required|min:5',     
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        
         $data = $request->all();
         $data['user_id'] =  Auth::guard('front')->user()->id;
         $comment = Comment::create($data);

@@ -6,19 +6,25 @@
           <form method="POST" action="{{ route('admin.posts.store') }}">
             @csrf
             <div class="flex flex-col space-y-2">
-              <label for="title" class="text-gray-700 select-none font-medium">Title</label>
+              <label for="title" class="text-gray-700 select-none font-medium">Title<span class="text-red-600">*</span></label>
               <input id="title" type="text" name="title" value="{{ old('title') }}" placeholder="Enter title"
                 class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200" />
+                @error('title')
+                  <span class="text-red-600  pt-5 pl-5">{{ $message }}</span>
+                @enderror
             </div>
 
             <div class="flex flex-col space-y-2">
-              <label for="description" class="text-gray-700 select-none font-medium">Description</label>
+              <label for="description" class="text-gray-700 select-none font-medium">Description<span class="text-red-600">*</span></label>
               <textarea name="description" id="description" placeholder="Enter description"
                 class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 rows="5">{{ old('description') }}</textarea>
+                @error('description')
+                  <span class="text-red-600  pt-5 pl-5">{{ $message }}</span>
+                @enderror
             </div>
 
-            <h3 class="text-xl my-4 text-gray-600">Role</h3>
+            <h3 class="text-xl my-4 text-gray-600">Status<span class="text-red-600">*</span></h3>
             <div class="grid grid-cols-3 gap-4">
               <div class="relative inline-flex">
                 <svg class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none" xmlns="http://www.w3.org/2000/svg"
@@ -33,6 +39,9 @@
                   <option value="0">Draft</option>
                   <option value="1">Publish</option>
                 </select>
+                @error('publish')
+                  <span class="text-red-600  pt-5 pl-5">{{ $message }}</span>
+                @enderror
               </div>
             </div>
             <div class="text-center mt-16 mb-16">

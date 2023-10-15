@@ -7,7 +7,7 @@
                   @csrf
                   @method('post')
                 <div class="flex flex-col space-y-2">
-                  <label for="role_name" class="text-gray-700 select-none font-medium">Role Name</label>
+                  <label for="role_name" class="text-gray-700 select-none font-medium">Role Name<span class="text-red-600">*</span></label>
                   <input
                     id="role_name"
                     type="text"
@@ -16,6 +16,9 @@
                     placeholder="Enter role"
                     class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                   />
+                  @error('name')
+                    <span class="text-red-600  pt-5 pl-5">{{ $message }}</span>
+                  @enderror
                 </div>
 
                 <h3 class="text-xl my-4 text-gray-600">Permissions</h3>

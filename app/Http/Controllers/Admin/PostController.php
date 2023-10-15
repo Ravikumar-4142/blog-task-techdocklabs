@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Auth;
@@ -50,6 +51,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'title'           => 'required|min:5',
+            'description'     => 'required|min:50', 
+            'publish'         => 'required',     
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
         $data= $request->all();
         $data['user_id'] = Auth::user()->id;
         $Post = Post::create($data);
@@ -87,6 +96,14 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $validator = Validator::make($request->all(), [
+            'title'           => 'required|min:5',
+            'description'     => 'required|min:50', 
+            'publish'         => 'required',     
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
         $post->update($request->all());
         return redirect()->back()->withSuccess('Post updated !!!');
     }

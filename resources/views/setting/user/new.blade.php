@@ -11,6 +11,9 @@
                     <input id="name" type="text" name="name" value="{{ old('name') }}"
                       placeholder="Enter name" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                     />
+                    @error('name')
+                      <span class="text-red-600  pt-5 pl-5">{{ $message }}</span>
+                    @enderror
                 </div>
         
                 <div class="flex flex-col space-y-2">
@@ -18,6 +21,9 @@
                     <input id="email" type="text" name="email" value="{{ old('email') }}"
                       placeholder="Enter email" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                     />
+                    @error('email')
+                      <span class="text-red-600  pt-5 pl-5">{{ $message }}</span>
+                    @enderror
                 </div>
                 
                 <div class="flex flex-col space-y-2">
@@ -26,11 +32,17 @@
                       placeholder="Enter password" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                     />
                 </div>
+                  @error('password')
+                    <span class="text-red-600  pt-5 pl-5">{{ $message }}</span>
+                  @enderror
                 
                 <div class="flex flex-col space-y-2">
                     <label for="password_confirmation" class="text-gray-700 select-none font-medium">Confirm Password</label>
                     <input id="password_confirmation" type="password" name="password_confirmation" placeholder="Re-enter password" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                     />
+                    @error('password_confirmation')
+                      <span class="text-red-600  pt-5 pl-5">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <h3 class="text-xl my-4 text-gray-600">Role</h3>

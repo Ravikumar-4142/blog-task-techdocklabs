@@ -22,16 +22,20 @@
                     <div class="bg-white shadow-md rounded my-6">
                         <div class="md:flex">
                             <div class="md:shrink-0">
-                                <h2>Post Comments:</h2>
+                                <h2>Post Comments<span class="text-red-600">*</span>:</h2>
                                 <form method="POST" action="{{ route('post.comment') }}">
                                     @csrf
                                     <input type="hidden" name="post_id" value="{{ $post->id}}">
 
                                     <div class="flex flex-col space-y-2">
                                         <textarea name="comment" id="comment" placeholder="Write comments here......"
-                                            class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
-                                            rows="5">{{ old('comment') }}</textarea>
+                                            class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200" rows="5">{{ old('comment') }}
+                                        </textarea>
+                                        @error('comment')
+                                            <span class="text-red-600  pt-5 pl-5">{{ $message }}</span>
+                                        @enderror
                                     </div>
+
                                     <div class="text-left mt-5 mb-5">
                                         <button type="submit"
                                             class="bg-blue-500 text-white font-bold px-5 py-1 rounded focus:outline-none shadow hover:bg-blue-500 transition-colors ">Submit</button>
