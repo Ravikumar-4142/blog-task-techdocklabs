@@ -5,7 +5,7 @@
         <div class="bg-white shadow-md rounded my-6 p-5">
           <form method="POST" action="{{ route('admin.posts.store') }}">
             @csrf
-            <h3 class="text-xl my-4 text-gray-600">Status<span class="text-red-600">*</span></h3>
+            <h3 class="text-xl my-4 text-gray-600">Category<span class="text-red-600">*</span></h3>
             <div class="grid grid-cols-3 gap-4">
               <div class="relative inline-flex">
                   <select

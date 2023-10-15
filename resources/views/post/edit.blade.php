@@ -6,7 +6,7 @@
                 <form method="POST" action="{{ route('admin.posts.update',$post->id)}}">
                   @csrf
                   @method('put')
-                  <h3 class="text-xl my-4 text-gray-600">Status<span class="text-red-600">*</span></h3>
+                  <h3 class="text-xl my-4 text-gray-600">Category<span class="text-red-600">*</span></h3>
                   <div class="grid grid-cols-3 gap-4">
                     <div class="relative inline-flex">
                       <svg class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none" xmlns="http://www.w3.org/2000/svg"

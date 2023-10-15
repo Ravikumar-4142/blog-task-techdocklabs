@@ -13,14 +13,14 @@ class FrontuserController extends Controller
     // user dashboard page
     public function index()
     {
-        $Post= Post::where('publish',1)->paginate(10);
+        $Post= Post::with('getCategory')->withCount('getComments')->where('publish',1)->paginate(10);
         return view('front.dashboard',['posts'=>$Post]);
     }
 
     // raed post
     public function post($id) 
     {
-        $Post   = Post::with(['getComments','getComments.getUser'])->find($id);
+        $Post   = Post::with(['getComments','getCategory','getComments.getUser'])->find($id);
         return view('front.read-post',['post'=>$Post]);
     }
 

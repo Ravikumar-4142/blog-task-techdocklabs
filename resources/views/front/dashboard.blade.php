@@ -17,9 +17,13 @@
                                         class="py-4 px-6 bg-grey-lightest font-bold text-sm text-grey-dark border-b border-grey-light">
                                         Title
                                     </th>
+                                     <th
+                                        class="py-4 px-6 bg-grey-lightest font-bold text-sm text-grey-dark border-b border-grey-light">
+                                        Category
+                                    </th>
                                     <th
                                         class="py-4 px-6 bg-grey-lightest font-bold text-sm text-grey-dark border-b border-grey-light w-2/12">
-                                        Status</th>
+                                        Total Comments</th>
                                     <th
                                         class="py-4 px-6 bg-grey-lightest font-bold text-sm text-grey-dark border-b border-grey-light text-right w-2/12">
                                         Actions</th>
@@ -29,8 +33,11 @@
                                 @foreach($posts as $post)
                                 <tr class="hover:bg-grey-lighter">
                                     <td class="py-4 px-6 border-b border-grey-light">{{ $post->title }}</td>
+                                     <td class="py-4 px-6 border-b border-grey-light">
+                                        {{ $post->getCategory->title }}
+                                    </td>
                                     <td class="py-4 px-6 border-b border-grey-light">
-                                        comments
+                                        {{ $post->get_comments_count }}
                                     </td>
                                     <td class="py-4 px-6 border-b border-grey-light text-right">
 
