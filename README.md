@@ -17,7 +17,7 @@
 
 ## Admin url 
 - /admin/login
-## front user url
+## Front user url
 - /login
 
 ## front user can view post list, read and post comments
