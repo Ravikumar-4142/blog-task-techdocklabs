@@ -15,6 +15,13 @@
 - create roles and permissions
 - assign roles and permissions to user
 
+## Admin url 
+- /admin/login
+## front user url
+- /login
+
+## front user can view post list, read and post comments
+
 
 
 ## How to run the code
